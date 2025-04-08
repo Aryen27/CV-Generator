@@ -3,7 +3,30 @@ import { Button } from "@/components/ui/button"
 
 
 function SideBar() {
-
+  const [userInfo, setUserInfo] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phoneNumber: '',
+    linkedin: '',
+    summary: '',
+    graduation: '',
+    grad_grade: 0,
+    hsc: '',
+    hsc_grade: 0,
+    ssc: '',
+    ssc_grade: 0,
+    work_ex: [
+      {
+        title: '',
+        company_name: '',
+        startDate: '',
+        endDate: '',
+        loc_type: '',
+        description: '',
+      }
+    ] 
+  });
 
   return (
     <div className='bg-slate-700 col-span-2 text-white'>
