@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { Button } from "@/components/ui/button"
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 
 function SideBar() {
@@ -33,8 +35,20 @@ function SideBar() {
     console.log(userInfo);
   }
 
+  const handleBlur = (e) => {
+    const { required, value } = e.target;
+  
+    if (required && value.trim() === "") {
+      toast.warn("This is a required field", {
+        position: "top-center",
+        autoClose: 2000,
+      });
+    }
+  };
+
   const handleChange = (e) => {
-    setUserInfo({ ...userInfo, [e.target.id]: e.target.value });
+    const { id, value } = e.target;
+    setUserInfo({ ...userInfo, [id]: value });
     console.log(userInfo);
   }
 
@@ -48,16 +62,16 @@ function SideBar() {
           <section>
           <div className='flex flex-col w-4/5 m-auto gap-3'>
           <label htmlFor='firstName' className='text-white'>First Name</label>
-          <input id='firstName' name='firstName' type='text' onChange={handleChange}/>
+          <input id='firstName' name='firstName' type='text' onChange={handleChange} required onBlur={handleBlur}/>
 
           <label htmlFor='lastName' className='text-white'>Last Name</label>
-          <input id='lastName' name='lastName' type='text' onChange={handleChange} />
+          <input id='lastName' name='lastName' type='text' onChange={handleChange} required onBlur={handleBlur}/>
 
           <label htmlFor='email' className='text-white'>Email ID</label>
-          <input id='email' name='email' type='email' onChange={handleChange}/>
+          <input id='email' name='email' type='email' onChange={handleChange} required onBlur={handleBlur}/>
 
           <label htmlFor='phone' className='text-white'>Phone</label>
-          <input id='phone' name='phone' type='text' minLength={9} onChange={handleChange} />
+          <input id='phone' name='phone' type='text' minLength={9} onChange={handleChange} required onBlur={handleBlur}/>
             
           <label htmlFor='linkedin' className='text-white'>Linkedin</label>
           <input id='linkedin' name='linkedin' type='url' pattern="https://.*" onChange={handleChange} />
@@ -161,6 +175,7 @@ function App() {
   return (
     <div className='grid grid-cols-5'>
       <SideBar className='' />
+      <ToastContainer />
       <ResumePreview className=''/>
     </div>
   )
