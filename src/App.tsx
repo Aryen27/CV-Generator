@@ -65,27 +65,27 @@ function SideBar() {
       
         {/*PERSONAL DETAILS*/}
       <Tabs.Content value="personal">
-      <div className='py-[2rem]'>
+      <div className='py-[1rem]'>
         <form method='POST' id='personal' className='flex flex-col gap-3  justify-center'>
           <section>
           <div className='flex flex-col w-4/5 m-auto gap-3'>
           <label htmlFor='firstName' className='text-white'>First Name</label>
-          <input id='firstName' name='firstName' type='text' onChange={handleChange} required onBlur={handleBlur}/>
+          <input id='firstName' name='firstName' type='text' className='w-full rounded' onChange={handleChange} required onBlur={handleBlur}/>
 
           <label htmlFor='lastName' className='text-white'>Last Name</label>
-          <input id='lastName' name='lastName' type='text' onChange={handleChange} required onBlur={handleBlur}/>
+          <input id='lastName' name='lastName' type='text' className='w-full rounded' onChange={handleChange} required onBlur={handleBlur}/>
 
           <label htmlFor='email' className='text-white'>Email ID</label>
-          <input id='email' name='email' type='email' onChange={handleChange} required onBlur={handleBlur}/>
+          <input id='email' name='email' type='email' className='w-full rounded' onChange={handleChange} required onBlur={handleBlur}/>
 
           <label htmlFor='phone' className='text-white'>Phone</label>
-          <input id='phone' name='phone' type='text' minLength={9} onChange={handleChange} required onBlur={handleBlur}/>
+          <input id='phone' name='phone' type='text' className='w-full rounded' minLength={9} onChange={handleChange} required onBlur={handleBlur}/>
             
           <label htmlFor='linkedin' className='text-white'>Linkedin</label>
-          <input id='linkedin' name='linkedin' type='url' pattern="https://.*" onChange={handleChange} />
+          <input id='linkedin' name='linkedin' type='url' className='w-full rounded' pattern="https://.*" onChange={handleChange} />
               
           <label htmlFor='summary' className='text-white'>Summary</label>
-          <input id='summary' name='summary' type='text' onChange={handleChange}/>
+          <input id='summary' name='summary' type='text' className='w-full rounded p-[2rem]' onChange={handleChange}/>
 
           </div>
               {/* className='flex mx-auto my-4' onClick={handleSubmit} */}
@@ -134,37 +134,67 @@ function SideBar() {
     </Tabs.Content>
         
         {/*Work Ex*/}
-      <Tabs.Content value="work">
-      <div className='flex justify-center '>
-      <form method='POST' className='flex flex-col justify-center items-center mx-auto mt-4 w-[80%]' id='work-ex'>
-      <div className='flex flex-col gap-2'>
-            <label htmlFor='title' className='text-white'>Title</label>
-            <input id='title' name='title' type='text' required className='w-[70%] flex gap-2' onChange={handleChange}/>
-      </div>
-          
-      <div className='flex flex-col gap-2 my-4'>
-      <label htmlFor='company_name' className='text-white'>Company Name</label>
-      <input id='company_name' name='company_name' type='text' required className='w-[70%]' onChange={handleChange}/>
-      </div>
-          
-
-      <div className='flex flex-col gap-2 my-4'>
-      <label htmlFor='loc_type' className='text-white'>Location Type</label>
-      <input id='loc_type' name='loc_type' type='text' required className='w-[70%]' onChange={handleChange}/>
-      </div>
+        <Tabs.Content value="work">
+        <div className="flex justify-center">
+          <form
+            method="POST"
+            className="flex flex-col items-center w-full max-w-lg mt-4"
+            id="work-ex"
+          >
+            <div className="flex flex-col gap-2 w-[80%]">
+              <label htmlFor="title" className="text-white">Title</label>
+              <input
+                id="title"
+                name="title"
+                type="text"
+                required
+                className="w-full rounded"
+                onChange={handleChange}
+              />
+            </div>
       
-          <div className='flex flex-col items-start gap-2'> 
-          <label htmlFor='description' className='text-white'>Description</label>
-          <textarea name='description' id='description' onChange={handleChange}/>
-          </div>
-              
-      <div className='w-2 mx-auto my-3 flex justify-between items-center mx-auto'>
-      <Button size="2" color='cyan' onClick={handleSubmit}>Submit</Button>
-      <Button size="2" color='teal'>Add</Button>
-      </div>
-    </form>
-      </div>
-        </Tabs.Content>
+            <div className="flex flex-col gap-2 my-4 w-[80%]">
+              <label htmlFor="company_name" className="text-white">Company Name</label>
+              <input
+                id="company_name"
+                name="company_name"
+                type="text"
+                required
+                className="w-full rounded"
+                onChange={handleChange}
+              />
+            </div>
+      
+            <div className="flex flex-col gap-2 my-4 w-[80%]">
+              <label htmlFor="loc_type" className="text-white">Location Type</label>
+              <input
+                id="loc_type"
+                name="loc_type"
+                type="text"
+                required
+                className="w-full rounded"
+                onChange={handleChange}
+              />
+            </div>
+      
+            <div className="flex flex-col gap-2 my-4 w-[80%]">
+              <label htmlFor="description" className="text-white">Description</label>
+              <textarea
+                name="description"
+                value={userInfo.work_ex[0].description}
+                onChange={handleChange}
+                className="w-full h-40 border rounded resize-none"
+                placeholder="Enter description"
+              />
+            </div>
+      
+            <div className="flex gap-4 mt-4">
+              <Button size="2" color="cyan" onClick={handleSubmit}>Submit</Button>
+              <Button size="2" color="teal">Add</Button>
+            </div>
+          </form>
+        </div>
+      </Tabs.Content>
         
       </Tabs.Root>
     </div>
