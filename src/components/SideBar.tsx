@@ -57,10 +57,9 @@ function SideBar({userInfo, setUserInfo}) {
           <input id='linkedin' name='linkedin' type='url' className='w-full rounded' pattern="https://.*" onChange={handleChange} />
               
           <label htmlFor='summary' className='text-white'>Summary</label>
-          <input id='summary' name='summary' type='text' className='w-full rounded p-[2rem]' onChange={handleChange}/>
+          <textarea name='summary' id='summary' value={userInfo.summary} onChange={handleChange} className="w-full h-[90px] border rounded resize-none" placeholder="Enter professional summary" />
 
           </div>
-              {/* className='flex mx-auto my-4' onClick={handleSubmit} */}
           </section>
               <div className='w-2 mx-auto my-3'>
               <Button size="2" color='cyan' onClick={handleSubmit}>Submit</Button>

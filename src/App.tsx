@@ -6,11 +6,11 @@ import Preview from "./components/Preview"
 
 function App() {
   const [userInfo, setUserInfo] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    linkedin: '',
+    firstName: 'John',
+    lastName: 'Doe',
+    email: 'abc@gmail.com',
+    phone: '0000000000',
+    linkedin: 'linkedin.com/abc',
     summary: '',
     graduation: '',
     grad_grade: 0,
