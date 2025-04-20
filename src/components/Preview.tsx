@@ -46,15 +46,26 @@ function Preview({userInfo}) {
           </div>
           </div>
 
-            <div className='w-[80%] flex justify-center mx-auto'>
+            <div className='w-[80%] flex flex-col    mx-auto'>
             <h3 className='text-lg font-medium border-b border-gray-400 w-full uppercase'>Work Experience</h3>
-            <div>
-            
-            </div>
+{
+  userInfo.workEx && userInfo.workEx.length > 0 && (
+    userInfo.workEx.map((job, index) => (
+                <div key= { index } className = 'my-2 flex gap-2' >
+                <p className='font-semibold' > {`${ job.title } | ${ job.company_name }`} </p>
+                <p>{job.description}</p>
+                </div>
+              ))
+            )}
+
             </div>
             
     </div>
   );
 }
+
+// <p className='text-sm text-gray-600'>
+// {job.startDate} - {job.endDate} | {job.loc_type}
+// </p>
 
 export default Preview
