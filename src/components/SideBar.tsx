@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Tabs, Button } from '@radix-ui/themes';
 
-function SideBar({userInfo, setUserInfo}) {
+function SideBar({ userInfo, setUserInfo }) {
+  const [graduation, setGraduation] = useState({});
+  const [hsc, setHsc] = useState({});
+  const [ssc, setSsc] = useState({});
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    setUserInfo({ ...userInfo, graduation, hsc, ssc });
     console.log(userInfo);
   }
 
@@ -17,6 +22,24 @@ function SideBar({userInfo, setUserInfo}) {
       });
     }
   };
+
+  const handleGraduationChange = (e) => {
+    const { id, value } = e.target;
+    setGraduation({ ...graduation, [id]: value });
+    console.log(graduation);
+  }
+
+  const handleHscChange = (e) => {
+    const { id, value } = e.target;
+    setHsc({ ...hsc, [id]: value });
+    console.log(hsc);
+  }
+
+  const handleSscChange = (e) => {
+    const { id, value } = e.target;
+    setSsc({ ...hsc, [id]: value });
+    console.log(ssc);
+  }
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -38,7 +61,7 @@ function SideBar({userInfo, setUserInfo}) {
         {/*PERSONAL DETAILS*/}
       <Tabs.Content value="personal">
       <div className='py-[1rem]'>
-        <form method='POST' id='personal' className='flex flex-col gap-3  justify-center'>
+        <form method='POST' id='personal' className='flex flex-col gap-3  justify-center' onSubmit={handleSubmit}>
           <section>
           <div className='flex flex-col w-4/5 m-auto gap-3'>
           <label htmlFor='firstName' className='text-white'>First Name</label>
@@ -62,43 +85,46 @@ function SideBar({userInfo, setUserInfo}) {
           </div>
           </section>
               <div className='w-2 mx-auto my-3'>
-              <Button size="2" color='cyan' onClick={handleSubmit}>Submit</Button>
+              <Button size="2" color='cyan' type='submit'>Submit</Button>
               </div>
         </form>
       </div>
         </Tabs.Content>
         
         {/*EDUCATION*/ }
-        <Tabs.Content value="education">
+    <Tabs.Content value="education">
     <div>
-        <form method='POST' className='flex flex-col justify-center items-center mt-4' id='edu'>
-      <div className='flex flex-col gap-2'>
+        <form method='POST' className='flex flex-col justify-center items-center mt-4' id='edu' onSubmit={handleSubmit}>
+        <div className='flex flex-col gap-2'>
             <label htmlFor='graduation' className='text-white'>Graduation</label>
             <div className='flex gap-2'> 
-        <input id='graduation' name='graduation' type='text' required className='w-[70%] rounded' onChange={handleChange}/>
-        <input id='grad_grade' name='grad_grade' type='number' required className='w-[20%] rounded' placeholder='75%' onChange={handleChange}/>
+            <input id='degree' name='graduation' type='text' required className='w-[80%] rounded' onChange={handleGraduationChange} placeholder='Degree'/>
+            <input id='grad_grade' name='grad_grade' type='number' className='w-[20%] rounded' onChange={handleGraduationChange} placeholder='75%' />
             </div>
-      </div>
+            <input id='university' name='graduation' type='text' required className='w-full rounded' onChange={handleGraduationChange} placeholder='University'/>
+        </div>
           
       <div className='flex flex-col gap-2 my-4'>
       <label htmlFor='hsc' className='text-white'>Higher Secondary/ Grade 12</label>
           <div className='flex gap-2'> 
-        <input id='hsc' name='hsc' type='text' required className='w-[70%] rounded' onChange={handleChange}/>
-        <input id='hsc_grade' name='hsc_grade' type='number' className='w-[20%] rounded' placeholder='75%' onChange={handleChange}/>
-           </div>
-          </div>
-          
-
-          <div className='flex flex-col gap-2 my-4'>
-      <label htmlFor='ssc' className='text-white'>Senior Secondary/ Grade 10</label>
-          <div className='flex gap-2'> 
-        <input id='ssc' name='ssc' type='text' required className='w-[70%] rounded' onChange={handleChange}/>
-        <input id='ssc_grade' name='ssc_grade' type='number' className='w-[20%] rounded' placeholder='75%' onChange={handleChange}/>
-           </div>
-              </div>
+        <input id='board' name='hsc' type='text' required className='w-[80%] rounded' onChange={handleHscChange} placeholder='Board'/>
+        <input id='hsc_grade' name='hsc_grade' type='number' className='w-[20%] rounded' placeholder='75%' onChange={handleHscChange}/>
+        </div>
+        <input id='school' name='hsc' type='text' required className='w-full rounded' onChange={handleHscChange} placeholder='School'/>
+        </div>
+        
+        
+        <div className='flex flex-col gap-2 my-4'>
+        <label htmlFor='ssc' className='text-white'>Senior Secondary/ Grade 10</label>
+        <div className='flex gap-2'> 
+        <input id='board' name='ssc' type='text' required className='w-[80%] rounded' onChange={handleSscChange} placeholder='Board'/>
+        <input id='ssc_grade' name='ssc_grade' type='number' className='w-[20%] rounded' placeholder='75%' onChange={handleSscChange}/>
+        </div>
+        <input id='school' name='ssc' type='text' required className='w-full rounded' onChange={handleSscChange} placeholder='School'/>
+        </div>
               
               <div className='w-2 mx-auto my-3'>
-              <Button size="2" color='cyan'>Submit</Button>
+              <Button size="2" color='cyan' type='submit'>Submit</Button>
               </div>
     </form>
     </div>
@@ -110,7 +136,8 @@ function SideBar({userInfo, setUserInfo}) {
           <form
             method="POST"
             className="flex flex-col items-center w-full max-w-lg mt-4"
-            id="work-ex"
+            id = "work-ex"
+            onSubmit={handleSubmit}
           >
             <div className="flex flex-col gap-2 w-[80%]">
               <label htmlFor="title" className="text-white">Title</label>
@@ -154,7 +181,7 @@ function SideBar({userInfo, setUserInfo}) {
             </div>
       
             <div className="flex gap-4 mt-4">
-              <Button size="2" color="cyan" onClick={handleSubmit}>Submit</Button>
+              <Button size="2" color="cyan" type='submit'>Submit</Button>
               <Button size="2" color="teal">Add</Button>
             </div>
           </form>

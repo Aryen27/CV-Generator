@@ -23,6 +23,13 @@ function Preview({userInfo}) {
           </div>
 
 
+          <div className='w-[80%] flex flex-col mx-auto mt-2'>
+          <h3 className='text-lg font-medium border-b border-gray-400 w-full'>Summary</h3>
+          {userInfo.summary}
+          </div>
+
+            
+            
     </div>
   );
 }
