@@ -27,7 +27,7 @@ function App() {
       school:'DPS',
       ssc_grade: 0,
     },
-    work_ex: [
+    workEx: [
       {
         title: '',
         company_name: '',

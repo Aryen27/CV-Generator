@@ -1,15 +1,46 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Tabs, Button } from '@radix-ui/themes';
+
+type workExp ={
+  title?: string;
+  company_name?: string;
+  startDate?: string;
+  endDate?: string;
+  loc_type?: string;
+  description?: string;
+};
 
 function SideBar({ userInfo, setUserInfo }) {
   const [graduation, setGraduation] = useState({});
   const [hsc, setHsc] = useState({});
   const [ssc, setSsc] = useState({});
+  const [workEx, setWorkEx] = useState<workExp[]>([]);
+  const [currWorkEx, setCurrWorkEX] = useState<workExp>({
+    title: '',
+    company_name: '',
+    startDate: '',
+    endDate: '',
+    loc_type: '',
+    description: '',
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setUserInfo({ ...userInfo, graduation, hsc, ssc });
+    setUserInfo({ ...userInfo, graduation, hsc, ssc , workEx});
     console.log(userInfo);
+  }
+  
+  const handleWorkSubmit = (e) => {
+    e.preventDefault();
+    const updatedWorkExp= [...workEx, currWorkEx]
+    setWorkEx(updatedWorkExp);
+    setUserInfo({ ...userInfo, graduation, hsc, ssc , workEx: updatedWorkExp});
+    console.log(workEx);
+    console.log(userInfo);
+  }
+
+  const handleAddBtn = (e) => {
+    console.log('Placeholder for add btn');
   }
 
   const handleBlur = (e) => {
@@ -22,6 +53,11 @@ function SideBar({ userInfo, setUserInfo }) {
       });
     }
   };
+  
+  const handleWorkExChange = (e) => {
+    const { id, value } = e.target;
+    setCurrWorkEX(prev => ({ ...prev, [id]: value }));
+  }
 
   const handleGraduationChange = (e) => {
     const { id, value } = e.target;
@@ -37,7 +73,7 @@ function SideBar({ userInfo, setUserInfo }) {
 
   const handleSscChange = (e) => {
     const { id, value } = e.target;
-    setSsc({ ...hsc, [id]: value });
+    setSsc({ ...ssc, [id]: value });
     console.log(ssc);
   }
 
@@ -137,7 +173,7 @@ function SideBar({ userInfo, setUserInfo }) {
             method="POST"
             className="flex flex-col items-center w-full max-w-lg mt-4"
             id = "work-ex"
-            onSubmit={handleSubmit}
+            onSubmit={handleWorkSubmit}
           >
             <div className="flex flex-col gap-2 w-[80%]">
               <label htmlFor="title" className="text-white">Title</label>
@@ -147,7 +183,7 @@ function SideBar({ userInfo, setUserInfo }) {
                 type="text"
                 required
                 className="w-full rounded"
-                onChange={handleChange}
+                onChange={handleWorkExChange}
               />
             </div>
       
@@ -159,7 +195,7 @@ function SideBar({ userInfo, setUserInfo }) {
                 type="text"
                 required
                 className="w-full rounded"
-                onChange={handleChange}
+                onChange={handleWorkExChange}
               />
             </div>
       
@@ -171,18 +207,18 @@ function SideBar({ userInfo, setUserInfo }) {
                 type="text"
                 required
                 className="w-full rounded"
-                onChange={handleChange}
+                onChange={handleWorkExChange}
               />
             </div>
       
             <div className="flex flex-col gap-2 my-4 w-[80%]">
               <label htmlFor="description" className="text-white">Description</label>
-              <textarea name="description" value={userInfo.work_ex[0].description} onChange={handleChange} className="w-full h-40 border rounded resize-none" placeholder="Enter description" />
+              <textarea id="description" value={currWorkEx.description} onChange={handleWorkExChange} className="w-full h-40 border rounded resize-none" placeholder="Enter description" />
             </div>
       
             <div className="flex gap-4 mt-4">
               <Button size="2" color="cyan" type='submit'>Submit</Button>
-              <Button size="2" color="teal">Add</Button>
+              <Button size="2" color="teal" onClick={handleAddBtn}>Add</Button>
             </div>
           </form>
         </div>
