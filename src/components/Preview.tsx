@@ -18,14 +18,37 @@ function Preview({userInfo}) {
           </div>
           
           <div className='w-[80%] flex flex-col mx-auto mt-2'>
-          <h3 className='text-lg font-medium border-b border-gray-400 w-full'>Summary</h3>
+          <h3 className='text-lg font-medium border-b border-gray-400 w-full uppercase'>Summary</h3>
           {userInfo.summary}
           </div>
 
 
           <div className='w-[80%] flex flex-col mx-auto mt-2'>
-          <h3 className='text-lg font-medium border-b border-gray-400 w-full'>Summary</h3>
-          {userInfo.summary}
+          <h3 className='text-lg font-medium border-b border-gray-400 w-full uppercase'>Education</h3>
+          <div className = 'flex justify-between' >
+          <p className='font-normal'>
+          { `${userInfo.graduation.degree} | ${userInfo.graduation.university}` }
+          </p>
+          {userInfo.graduation.grad_grade !== 0 && userInfo.graduation.grad_grade !== undefined && (
+            <p>{userInfo.graduation.grad_grade}%</p>
+          )}
+            </div>
+          <div className='flex justify-between'>
+            <p>
+          { `HSC | ${userInfo.hsc.school}` }
+          </p>
+          {userInfo.hsc.hsc_grade !== 0 && userInfo.hsc.hsc_grade !== undefined && (
+            <p>{userInfo.hsc.hsc_grade}%</p>
+          )}
+            </div>
+            <div className='flex justify-between'>
+            <p>
+            { `SSC | ${userInfo.ssc.school}` }
+            </p>
+          {userInfo.ssc.ssc_grade !== 0 && userInfo.ssc.ssc_grade !== undefined && (
+            <p>{`${userInfo.ssc.ssc_grade}%`}</p>
+          )}
+            </div>
           </div>
 
             

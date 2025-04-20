@@ -15,16 +15,16 @@ function App() {
     graduation: {
       degree: 'Bachelors in Economics',
       university:'Mumbai University',
-      grad_grade: 75,
+      grad_grade: 0,
     },
     hsc: {
       board:'CBSE',
-      school:'',
+      school:'DPS',
       hsc_grade: 0,
     },
     ssc: {
       board:'CBSE',
-      school:'',
+      school:'DPS',
       ssc_grade: 0,
     },
     work_ex: [
